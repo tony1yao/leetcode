@@ -6,7 +6,7 @@ public class SubtreeofAnotherTree {
     }
 
     private boolean dfs(TreeNode node, TreeNode subRoot) {
-        if (isTreeIdentical(node, subRoot)) {
+        if (isNodeIdentical(node, subRoot)) {
             return true;
         } else {
             boolean isSub;
@@ -26,19 +26,19 @@ public class SubtreeofAnotherTree {
         }
     }
 
-    private boolean isTreeIdentical(TreeNode node, TreeNode subRoot) {
-        if (!isNodeIdentical(node, subRoot)) {
-            return false;
-        } else {
-            if(node.left != null && !isTreeIdentical(node.left, subRoot.left)) {
-                return false;
-            }
-            if (node.right != null && !isTreeIdentical(node.right, subRoot.right)) {
-                return false;
-            }
-            return true;
-        }
-    }
+//    private boolean isTreeIdentical(TreeNode node, TreeNode subRoot) {
+//        if (!isNodeIdentical(node, subRoot)) {
+//            return false;
+//        } else {
+//            if(node.left != null && !isNodeIdentical(node.left, subRoot.left)) {
+//                return false;
+//            }
+//            if (node.right != null && !isNodeIdentical(node.right, subRoot.right)) {
+//                return false;
+//            }
+//            return true;
+//        }
+//    }
 
     private boolean isNodeIdentical(TreeNode node, TreeNode anotherNode) {
         if (node == null && anotherNode == null) {
@@ -47,8 +47,14 @@ public class SubtreeofAnotherTree {
             return false;
         } else if (node == null && anotherNode != null) {
             return false;
+        } else if (node.val != anotherNode.val) {
+            return false;
+        } else if (!isNodeIdentical(node.left, anotherNode.left)){
+            return false;
+        } else if (!isNodeIdentical(node.right, anotherNode.right)) {
+            return false;
         } else {
-            return node.val == anotherNode.val && isNodeIdentical(node.left, anotherNode.left) && isNodeIdentical(node.right, anotherNode.right);
+            return true;
         }
     }
 }
